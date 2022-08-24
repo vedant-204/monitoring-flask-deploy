@@ -20,7 +20,8 @@ COPY --chown=python:python . .
 
 USER 999
 
+EXPOSE 5000
 ENV PATH="/usr/app/venv/bin:$PATH"
-CMD [ "gunicorn", "--bind", "0.0.0.0:5000", "main:app" ]
+CMD gunicorn main:app
 
 # docker build . -t flask-assign
