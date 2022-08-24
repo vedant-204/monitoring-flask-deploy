@@ -1,6 +1,6 @@
 services:
   server:
-    image: flask-assign
+    image: vedant2040/flask-assign:0.0.1 
     container_name: flask-assign
     restart: always
     ports:
