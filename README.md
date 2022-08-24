@@ -1,21 +1,17 @@
-# DevOps Project
+# Monitoring Flask Deployment
 
-## Tech Used
+## Tech Stack
 
 - flask (python)
 - Docker
-- prometheus
 - grafana
+- prometheus
 
 ### dashboard
 
 ![dashboard](images/grafana-dashboard.png)
 
 ![alerts](images/alerts.png)
-
-![alert-mail](images/alert-mail.png)
-
-![alert-discord](images/alert-discord.png)
 
 ![alert-history](images/alert-history.png)
 
