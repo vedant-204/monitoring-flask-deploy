@@ -3,6 +3,8 @@ from datetime import datetime
 from werkzeug.middleware.dispatcher import DispatcherMiddleware
 from prometheus_client import make_wsgi_app
 from flask_prom import Prometheus
+import  pytz
+import os
 
 app = Flask(__name__)
 app.config['SEND_FILE_MAX_AGE_DEFAULT'] = 0
@@ -20,9 +22,9 @@ def hello():
 @app.route('/time')
 def time():
     try:
-        now = datetime.now()
-        current_time = now.strftime("%H:%M:%S")
-        return current_time
+        tz = pytz.timezone('Asia/Kolkata')
+        time = datetime.now(tz).strftime('%Y-%m-%d %H:%M:%S')
+        return time
     except:
         return "error occurred"
 
