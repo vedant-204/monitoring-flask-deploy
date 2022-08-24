@@ -1,0 +1,48 @@
+services:
+  server:
+    image: flask-assign
+    container_name: flask-assign
+    restart: always
+    ports:
+      - 5000:5000
+    networks:
+      - bytelearn
+
+  prometheus:
+    image: prom/prometheus
+    container_name: prometheus
+    volumes:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml
+      - ./alerts.rules.yml:/etc/prometheus/alert.rules.yml
+    command:
+      - --config.file=/etc/prometheus/prometheus.yml
+    restart: unless-stopped
+    ports:
+      - 9090:9090
+    depends_on:
+      - server
+    networks:
+      - bytelearn
+
+  grafana:
+    image: grafana/grafana
+    container_name: grafana
+    volumes:
+      - ./grafana/provisioning/datasources:/etc/grafana/provisioning/datasources
+      - grafana-storage:/var/lib/grafana
+    restart: unless-stopped
+    ports:
+      - 3000:3000
+    env_file:
+      - .env
+    depends_on:
+      - server
+    networks:
+      - bytelearn
+
+networks:
+  bytelearn:
+    driver: bridge
+
+volumes:
+  grafana-storage:
